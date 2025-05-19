@@ -1,0 +1,7 @@
+@import "tailwindcss";
+
+@source "../internal/view";
+
+*:focus {
+	outline: none !important;
+}

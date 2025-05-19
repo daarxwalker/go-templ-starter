@@ -1,0 +1,25 @@
+version: '3'
+
+tasks:
+  dev-view:
+    cmds:
+      - templ generate -path ./internal/view -watch
+    silent: false
+
+  dev-example:
+    cmds:
+      - reflex -r '(\.go$|go\.mod$)' -s go run ./app/example
+    silent: false
+
+  dev-assets:
+    cmds:
+      - bun run ./public/esbuild.config.ts
+    silent: false
+
+  dev:
+    deps:
+      - dev-view
+      - dev-example
+      - dev-assets
+    silent: false
+
