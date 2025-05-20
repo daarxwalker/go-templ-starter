@@ -7,9 +7,9 @@ import (
 )
 
 func Cache(c context.Context) *cache_service.CacheService {
-	cfg, ok := c.Value(cache_service.Token).(*cache_service.CacheService)
+	service, ok := c.Value(cache_service.Token).(*cache_service.CacheService)
 	if !ok {
 		panic(cache_service.Token + " not found in context")
 	}
-	return cfg
+	return service
 }
