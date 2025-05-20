@@ -2,4 +2,5 @@ localhost {
 	handle {
 		reverse_proxy project-example:8000
 	}
+	tls internal
 }
