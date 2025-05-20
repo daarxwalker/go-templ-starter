@@ -3,10 +3,5 @@ go 1.24
 use (
 	app/example
 
-	internal/config
-	internal/facade
-	internal/middleware
-	internal/service
-	internal/util
-	internal/view
+	common
 )

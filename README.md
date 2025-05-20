@@ -43,7 +43,7 @@ cd public && bun i
 ## Run dev
 Must be in root of project
 ```bash
-task dev
+task up
 ```
 
-The project's running default on port :8080, now.
+The project's running on https://localhost, now.

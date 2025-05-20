@@ -1,3 +1,2 @@
+import '@starfederation/datastar'
 import './index.css'
-
-console.log("Hello via Bun!");

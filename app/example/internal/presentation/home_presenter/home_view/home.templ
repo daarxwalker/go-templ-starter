@@ -1,0 +1,14 @@
+package home_view
+
+import (
+	"common/pkg/view"
+	"fmt"
+)
+
+templ Home(ok bool) {
+	@view.Layout() {
+		<div class="bg-slate-100 w-screen h-screen grid place-items-center text-center font-semibold">
+			Go Templ Starter: { fmt.Sprintf("%t", ok) }
+		</div>
+	}
+}

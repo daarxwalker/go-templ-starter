@@ -1,0 +1,68 @@
+services:
+  project-example:
+    tty: true
+    container_name: project-example
+    image: project-example
+    depends_on:
+      project-postgres:
+        condition: service_healthy
+      project-dragonfly:
+        condition: service_healthy
+    build:
+      context: ../../
+      dockerfile: bin/development/Dockerfile
+    networks:
+      - project
+
+  project-postgres:
+    tty: true
+    container_name: project-postgres
+    image: postgres:latest
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: project
+      POSTGRES_USER: project
+      POSTGRES_PASSWORD: project
+    ports:
+      - "5432:5432"
+    volumes:
+      - project_postgres_data:/var/lib/postgresql/data
+    networks:
+      - project
+
+  project-dragonfly:
+    tty: true
+    image: docker.dragonflydb.io/dragonflydb/dragonfly:latest
+    container_name: project-dragonfly
+    ports:
+      - 6379:6379
+    restart: always
+    volumes:
+      - project_dragonfly_data:/data
+    networks:
+      - project
+
+  project-caddy:
+    image: caddy:2.10.0-alpine
+    tty: true
+    container_name: project-caddy
+    restart: unless-stopped
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - project_caddy_data:/data
+      - project_caddy_config:/config
+    networks:
+      - project
+
+volumes:
+  project_postgres_data:
+  project_dragonfly_data:
+  project_caddy_data:
+  project_caddy_config:
+
+networks:
+  project:
+    name: project

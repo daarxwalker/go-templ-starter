@@ -3,23 +3,27 @@ version: '3'
 tasks:
   dev-view:
     cmds:
-      - templ generate -path ./internal/view -watch
-    silent: false
-
-  dev-example:
-    cmds:
-      - reflex -r '(\.go$|go\.mod$)' -s go run ./app/example
-    silent: false
+      - templ generate -watch
 
   dev-assets:
     cmds:
-      - bun run ./public/esbuild.config.ts
-    silent: false
+      - reflex -r '(\.templ$|\.css$|\.js$|\.ts$)' -G 'public/static/dist/**' -s bun run ./public/esbuild.config.ts
 
-  dev:
+  dev-tilt-up:
+    cmds:
+      - tilt up -f bin/development/Tiltfile
+
+  dev-tilt-down:
+    cmds:
+      - tilt down -f bin/development/Tiltfile
+
+  up:
     deps:
       - dev-view
-      - dev-example
       - dev-assets
-    silent: false
+      - dev-tilt-up
+
+  down:
+    deps:
+      - dev-tilt-down
 

@@ -1,0 +1,26 @@
+package view
+
+import (
+	"common/pkg/util/templ_util"
+	"fmt"
+)
+
+templ Error(status int, err error) {
+	<html lang="en">
+		<head>
+			<title>Go Templ Starter</title>
+			<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+			<link rel="icon" href="/static/favicon.ico">
+			<link rel="stylesheet" type="text/css" href={ templ_util.GetAssetsURL(ctx, "css") } />
+			<script defer src={ templ_util.GetAssetsURL(ctx, "js") }></script>
+		</head>
+		<body>
+			<div class="bg-slate-100 w-screen h-screen grid place-items-center text-center text-red-600">
+				<div class="space-y-4">
+					<div class="font-semibold">{ fmt.Sprintf("%d", status) }</div>
+					<div class="text-sm">{ fmt.Sprintf("%v", err) }</div>
+				</div>
+			</div>
+		</body>
+	</html>
+}

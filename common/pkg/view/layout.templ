@@ -1,0 +1,20 @@
+package view
+
+import (
+	"common/pkg/util/templ_util"
+)
+
+templ Layout() {
+	<html lang="en">
+		<head>
+			<title>Go Templ Starter</title>
+			<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+			<link rel="icon" href="/static/favicon.ico">
+			<link rel="stylesheet" type="text/css" href={ templ_util.GetAssetsURL(ctx, "css") } />
+			<script defer src={ templ_util.GetAssetsURL(ctx, "js") }></script>
+		</head>
+		<body>
+			{ children... }
+		</body>
+	</html>
+}
