@@ -1,7 +1,6 @@
 package home_handler
 
 import (
-	"errors"
 	"net/http"
 	
 	"github.com/gin-gonic/gin"
@@ -13,8 +12,6 @@ import (
 
 func Home() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		c.AbortWithError(http.StatusInternalServerError, errors.New("test"))
-		return
 		result, err := example_repository.GetExample(c, facade.DB(c))
 		if err != nil {
 			c.AbortWithError(http.StatusInternalServerError, err)
